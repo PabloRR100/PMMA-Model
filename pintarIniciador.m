@@ -18,7 +18,5 @@ function pintarIniciador(t, i1, i2)
     ylabel('Concentración Iniciador (M)')
     ylim([0 iniciador120(1)]);
     legend('Experimental 120ºC', 'Experimental 130ºC', 'Modelo 120', 'Modelo130')
-
-
     
 end    

@@ -1,20 +1,17 @@
 
-% Sistema dinamico en derivadas parciales para la polimerizacion a 130ºC
+% Sistema dinamico en derivadas parciales para la polimerizacion a 120ºC
 
-function f = sistemaDinamico130 (t,x)
+function f = sistemaDinamico110(t,x)
 
     % CONDICIONES INICIALES
     
     global Rjul
     global Mo                           % Monomero inicial
-    %global I3o                         % Iniciador inicial
     global ef                           % efiencia iniciador
-    global T3
+    global T1
 %     global B
 %     global C
-    
-     B = -4;
-     C = -5;
+
     
     % COMPONENTES DEL SISTEMA
     
@@ -33,26 +30,30 @@ function f = sistemaDinamico130 (t,x)
         X = (Mo - M) / (Mo);
         
     % CONSTANTES CINÉTICAS
+    
+        B = -4;
+        C = -5;
    
         %kd   = 2.5061 * 10^-5;   % Datos Mejico
-        kd   = 1.6*10^10 * exp(-111380/(Rjul*T3));
+        kd   = 1.6*10^10 * exp(-111380/(Rjul*T1));
         ki0  = 2.8711 * 10^-11;  % Emilio
-        ki1  = 4.92 * 10^5 * exp(-18195.54/(Rjul*T3)); % Mahabadi
+        ki1  = 4.92 * 10^5 * exp(-18195.54/(Rjul*T1));      % Mahabadi
         
-        kp   = 4.92 * 10^5 * exp(-18195.54/(Rjul*T3)); % Mahabadi
-        %kp   = 4.92 * 10^7 * exp(-18153.74/(Rjul*T3)); % Matthew Justin --> SE DISPARA MUCHISIMO
-         
-%        ktd  = 9.80 * 10^7 * exp(-2930.180/(Rjul*T3)); % Mahabadi
-             ktd0 = 9.80 * 10^7 * exp(-2930.180/(Rjul*T3)); 
-         ktd  = ktd0 * ( exp( B*X + C*X^2));            % Friis
-        %ktd  = (kp * M)^2 / (2*kd*ef*I3*(2/(1-X))^2);  % Pablo
+        kp   = 4.92 * 10^5 * exp(-18195.54/(Rjul*T1));      % Mahabadi
+        %kp   = 4.92 * 10^7 * exp(-18153.74/(Rjul*T1));         % Matthew Justin --> SE DISPARA MUCHISIMO
         
-        ktc = 0.9 * ktd;                              % Matthew Justin
-        %ktc = 9.80 * 10^7 * exp(-2930.180/(Rjul*T1)); % Hacerlas iguales
+        %ktd  = 9.80 * 10^7 * exp(-2930.180/(Rjul*T1));      % Mahabadi
+            ktd0 = 9.80 * 10^7 * exp(-2930.180/(Rjul*T1)); 
+        ktd  = ktd0 * ( exp( B*X + C*X^2));                 % Friis
+        %ktd   = ktd0 * (1 + B*X + C*X^2);                   % Pablo
+        %ktd  = (kp * M)^2 / (2*kd*ef*I3*(2/(1-X))^2);          % Pablo2
         
-        %kfM = 0.9;              % Emilio
-        kfM  = 2.41 * 10^9 * exp(-2930.180/(Rjul*T3)); % Matthew Justin
-
+        %ktc = 0;                                            % Solo desproporción
+        ktc = 0.9 * ktd;                                    % Matthew Justin
+        %ktc = 9.80 * 10^7 * exp(-2930.180/(Rjul*T1));      % Hacerlas iguales
+        
+        %kfM = 0.9;                                         % Emilio
+        kfM  = 2.41 * 10^9 * exp(-2930.180/(Rjul*T1));      % Matthew Justin
             
     % BALANCES DE COMPONENTES 
     
