@@ -10,9 +10,9 @@ function pintarConversiones(t, x110, x120, x130, r110, r120, r130)
     pantalla = get(groot, 'ScreenSize');
     figure('Position',[0 0 pantalla(3)/2 pantalla(4)])
     hold on
-        plot(tiempos110,convers110,'g--')
-        plot(tiempos120,convers120,'b--')
-        plot(tiempos130,convers130,'r--')
+        plot(tiempos110,convers110,'g*')
+        plot(tiempos120,convers120,'b*')
+        plot(tiempos130,convers130,'r*')
         plot(t/60, x110*100, 'g')
         plot(t/60, x120*100, 'b')
         plot(t/60, x130*100, 'r')

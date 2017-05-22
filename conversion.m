@@ -6,7 +6,7 @@ function conversion()
     global I3o
 
     to = 0;         % s
-    tf = 5000;      % s 
+    tf = 5400;      % s 
 
     tiempo  = linspace(to, tf, 100000);     % Vector tiempo de reacción
     step = 100;                             % Máximo intervalo de tiempo que se dará a ODE
