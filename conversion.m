@@ -24,11 +24,12 @@ function conversion()
     
     monomero110   = x1(:,2);                     % Monomero(t)   a 110ºC
     polimero110   = x1(:,6);                     % Polimero(t)   a 110ºC
+    PeP110        = x1(:,7);                     % PeP(t)        a 110ºC
     conversion110 = (Mo - monomero110(:))/Mo;    % Conversion(t) a 110ºC
     
     rad110        = x1(:,4);                     % R1(t)         a 110ºC
     rads110       = x1(:,5);                     % R2(t)         a 110ºC
-    radicales110  = rad110 + rads110;            % R(t) totales  a 110ºC
+    radicales110  = rad110 + 2.*rads110;            % R(t) totales  a 110ºC
     rp110         = monomero110 .* radicales110; % Rp(t)         a 110ºC
     
     % --- %
@@ -37,11 +38,12 @@ function conversion()
     
     monomero120   = x2(:,2);                     % Monomero(t)   a 120ºC
     polimero120   = x2(:,6);                     % Polimero(t)   a 120ºC
+    PeP120        = x2(:,7);                     % PeP(t)        a 120ºC
     conversion120 = (Mo - monomero120(:))/Mo;    % Conversion(t) a 120ºC
     
     rad120        = x2(:,4);                     % R1(t)         a 120ºC
     rads120       = x2(:,5);                     % R2(t)         a 120ºC
-    radicales120  = rad120 + rads120;            % R(t) totales  a 120ºC
+    radicales120  = rad120 + 2.*rads120;            % R(t) totales  a 120ºC
     rp120         = monomero120 .* radicales120; % Rp(t)         a 120ºC
     
     % --- %
@@ -50,11 +52,12 @@ function conversion()
     
     monomero130   = x3(:,2);                     % Monomero(t)   a 130ºC
     polimero130   = x3(:,6);                     % Polimero(t)   a 130ºC
+    PeP130        = x3(:,7);                     % PeP(t)        a 130ºC
     conversion130 = (Mo - monomero130(:))/Mo;    % Conversion(t) a 130ºC
     
     rad130        = x3(:,4);                     % R1(t)         a 130ºC
     rads130       = x3(:,5);                     % R2(t)         a 130ºC
-    radicales130  = rad130 + rads130;            % R(t) totales  a 130ºC
+    radicales130  = rad130 + 2.*rads130;            % R(t) totales  a 130ºC
     rp130         = monomero130 .* radicales130; % Rp(t)         a 130ºC
     
    
@@ -63,7 +66,7 @@ function conversion()
     %pintarIniciador(t2, iniciador120, iniciador130)
        
     pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
-   % pintarPolimero(t1, polimero110, polimero120, polimero130)
+    pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
     
     
 end

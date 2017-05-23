@@ -6,7 +6,7 @@ global Rjul
 nmax = 12000;   % Máxima longitud de cadena
 n = 1:nmax;     % Vector de 1 en 1 hasta n
 
-A(1:length(tiempo)) = 0;    % Inicializar A con el tamaño del vector tiempo
+denominador(1:length(tiempo)) = 0;    % Inicializar A con el tamaño del vector tiempo
 alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
 
 % Vectores de las especies
@@ -41,7 +41,7 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
  
 % Cálculo
         
-    for t = 1:length(t)-1
+    for t = 1:length(tiempo)-1
         
         % Constantes cinéticas
 
@@ -60,7 +60,12 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
             ktc = k(6);
             kfM = k(7);
         
-      A(i) = kp*M(t)*  
+      denominador(t)   = (kp+kfM) * M(t) + (ktc+ktd)*(R1(t) + 2*R2(t));
+      alp(t) = denominador(t) / (kp*M(t));
+      
+      R0(1) = 2*ki1*Ip2p*M(t) / denominador(t);
+      
+      r0(1) = (ki0 - 4*kfM*R2(t))*M(t) ;
         
     end
     
