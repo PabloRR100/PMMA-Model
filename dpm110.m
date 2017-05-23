@@ -1,5 +1,7 @@
 
 global tiempo
+global T1
+global Rjul
 
 nmax = 12000;   % Máxima longitud de cadena
 n = 1:nmax;     % Vector de 1 en 1 hasta n
@@ -35,12 +37,31 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
         r7 (1:nmax) = 0;
         r8 (1:nmax) = 0;
         r9 (1:nmax) = 0;
-        r10(1:nmax) = 0;
+        r10(1:nmax) = 0; 
+ 
+% Cálculo
         
+    for t = 1:length(t)-1
         
-    % Constantes
-    
-        k = 
+        % Constantes cinéticas
 
+            B = -4;
+            C = -5;
+
+            T = T1;
+            R = Rjul;
+            k = constantes(X, T, R, B, C);
+
+            kd  = k(1);
+            ki0 = k(2);
+            ki1 = k(3);
+            kp  = k(4);
+            ktd = k(5);
+            ktc = k(6);
+            kfM = k(7);
+        
+      A(i) = kp*M(t)*  
+        
+    end
     
     

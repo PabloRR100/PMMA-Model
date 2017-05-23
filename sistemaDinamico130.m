@@ -13,9 +13,6 @@ function f = sistemaDinamico130 (t,x)
 %     global B
 %     global C
     
-     B = -4;
-     C = -5;
-    
     % COMPONENTES DEL SISTEMA
     
         I3   = x(1);        % x(1) = Iniciador trifuncional 
@@ -33,25 +30,21 @@ function f = sistemaDinamico130 (t,x)
         X = (Mo - M) / (Mo);
         
     % CONSTANTES CINÉTICAS
-   
-        %kd   = 2.5061 * 10^-5;   % Datos Mejico
-        kd   = 1.6*10^10 * exp(-111380/(Rjul*T3));
-        ki0  = 2.8711 * 10^-11;  % Emilio
-        ki1  = 4.92 * 10^5 * exp(-18195.54/(Rjul*T3)); % Mahabadi
+    
+        B = -4;
+        C = -5;
         
-        kp   = 4.92 * 10^5 * exp(-18195.54/(Rjul*T3)); % Mahabadi
-        %kp   = 4.92 * 10^7 * exp(-18153.74/(Rjul*T3)); % Matthew Justin --> SE DISPARA MUCHISIMO
-         
-%        ktd  = 9.80 * 10^7 * exp(-2930.180/(Rjul*T3)); % Mahabadi
-             ktd0 = 9.80 * 10^7 * exp(-2930.180/(Rjul*T3)); 
-         ktd  = ktd0 * ( exp( B*X + C*X^2));            % Friis
-        %ktd  = (kp * M)^2 / (2*kd*ef*I3*(2/(1-X))^2);  % Pablo
+        T = T3;
+        R = Rjul;
+        k = constantes(X, T, R, B, C);
         
-        ktc = 0.9 * ktd;                              % Matthew Justin
-        %ktc = 9.80 * 10^7 * exp(-2930.180/(Rjul*T1)); % Hacerlas iguales
-        
-        %kfM = 0.9;              % Emilio
-        kfM  = 2.41 * 10^9 * exp(-2930.180/(Rjul*T3)); % Matthew Justin
+        kd  = k(1);
+        ki0 = k(2);
+        ki1 = k(3);
+        kp  = k(4);
+        ktd = k(5);
+        ktc = k(6);
+        kfM = k(7);
 
             
     % BALANCES DE COMPONENTES 

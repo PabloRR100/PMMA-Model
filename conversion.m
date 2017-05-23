@@ -23,6 +23,7 @@ function conversion()
     %iniciador110  = x1(:,1);                     % Iniciador(t)
     
     monomero110   = x1(:,2);                     % Monomero(t)   a 110ºC
+    polimero110   = x1(:,6);                     % Polimero(t)   a 110ºC
     conversion110 = (Mo - monomero110(:))/Mo;    % Conversion(t) a 110ºC
     
     rad110        = x1(:,4);                     % R1(t)         a 110ºC
@@ -35,6 +36,7 @@ function conversion()
     %iniciador120  = x2(:,1);                     % Iniciador(t)
     
     monomero120   = x2(:,2);                     % Monomero(t)   a 120ºC
+    polimero120   = x2(:,6);                     % Polimero(t)   a 120ºC
     conversion120 = (Mo - monomero120(:))/Mo;    % Conversion(t) a 120ºC
     
     rad120        = x2(:,4);                     % R1(t)         a 120ºC
@@ -47,6 +49,7 @@ function conversion()
     %iniciador130  = x3(:,1);                     % Iniciador(t)
     
     monomero130   = x3(:,2);                     % Monomero(t)   a 130ºC
+    polimero130   = x3(:,6);                     % Polimero(t)   a 130ºC
     conversion130 = (Mo - monomero130(:))/Mo;    % Conversion(t) a 130ºC
     
     rad130        = x3(:,4);                     % R1(t)         a 130ºC
@@ -60,5 +63,7 @@ function conversion()
     %pintarIniciador(t2, iniciador120, iniciador130)
        
     pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
+   % pintarPolimero(t1, polimero110, polimero120, polimero130)
+    
     
 end
