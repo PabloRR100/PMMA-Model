@@ -67,7 +67,8 @@ clear globals
     global Vo
     global I3o
     
-        I3o = 0.01;     % mol/L
+        %I3o = 0.01;     % mol/L
+        I3o = 0;     % Para las pruebas sin iniciador
         Mo  = p / PM;   % mol/L ( densidad / PM) 
         Vo  = 0.9;      % L
 
