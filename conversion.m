@@ -76,7 +76,7 @@ function conversion()
     %pintarIniciador(t2, iniciador120, iniciador130)
        
     pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
-    pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
-    
+    %pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
+        % Estamos pintando mal, esto viene después del Módulo de Dist.
     
 end
