@@ -2,6 +2,8 @@
 global tiempo
 global T1
 global Rjul
+global B
+global C
 
 nmax = 12000;   % Máxima longitud de cadena
 n = 1:nmax;     % Vector de 1 en 1 hasta n
@@ -13,6 +15,7 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
 
     % Diradicales --> Inicializamos a 0
     
+       %Rn = Diradical con N grupos peróxidos
         R0 (1:nmax) = 0;
         R1 (1:nmax) = 0;
         R2 (1:nmax) = 0;
@@ -27,6 +30,7 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
         
     % Monoradicales --> Inicializamos a 0
     
+       %rn = Diradical con n grupos peróxidos
         r0 (1:nmax) = 0;
         r1 (1:nmax) = 0;
         r2 (1:nmax) = 0;
@@ -37,16 +41,18 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
         r7 (1:nmax) = 0;
         r8 (1:nmax) = 0;
         r9 (1:nmax) = 0;
-        r10(1:nmax) = 0; 
+        r10(1:nmax) = 0;
+        
+    % Polímeros --> Inicializamos a 0
+    
+        p0(1:length(tiempo), 1:nmax) = 0;
+        
  
 % Cálculo
         
     for t = 1:length(tiempo)-1
         
         % Constantes cinéticas
-
-            B = -4;
-            C = -5;
 
             T = T1;
             R = Rjul;
@@ -68,5 +74,6 @@ alp(1:length(tiempo)) = 0;  % Inicializar alp con el tamaños del vector tiempo
       r0(1) = (ki0 - 4*kfM*R2(t))*M(t) ;
         
     end
+    
     
     
