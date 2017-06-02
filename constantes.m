@@ -22,9 +22,11 @@ function k = constantes(X, T, R, B, C)
     %k(5)   = ktd0 * (1 + B*X + C*X^2);                   % Pablo
     %ktd  = (kp * M)^2 / (2*kd*ef*I3*(2/(1-X))^2);        % Pablo2
 
-    %k(6) = 0;                                       % Solo desproporción
-    k(6) = 0.9 * k(5);                               % Matthew Justin
-    %k(6) = 9.80 * 10^7 * exp(-2930.180/(R*T));      % Hacerlas iguales
+    %k(6) = 0;                                          % Solo desproporción
+    k(6) = 0.9 * k(5);                                 % Matthew Justin
+    %k(6) = (X/(1-X)) * k(6);
+    %k(6) = 3.956*10^4 * exp(17096/(R*T));             % Bevington
+    %k(6) = k(7);                                       % Hacerlas iguales
 
     %k(7) = 0.9;                                      % Emilio
     k(7)  = 2.41 * 10^9 * exp(-2930.180/(R*T));      % Matthew Justin

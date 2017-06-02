@@ -9,6 +9,8 @@ function f = sistemaDinamico110(t,x)
     global Mo                           % Monomero inicial
     global ef                           % efiencia iniciador
     global T1
+    global B
+    global C
 
     
     % COMPONENTES DEL SISTEMA
@@ -28,9 +30,6 @@ function f = sistemaDinamico110(t,x)
         X = (Mo - M) / (Mo);
         
     % CONSTANTES CINÉTICAS
-    
-        B = -4;
-        C = -5;
         
         T = T1;
         R = Rjul;

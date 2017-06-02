@@ -10,8 +10,8 @@ function f = sistemaDinamico130 (t,x)
     %global I3o                         % Iniciador inicial
     global ef                           % efiencia iniciador
     global T3
-%     global B
-%     global C
+    global B
+    global C
     
     % COMPONENTES DEL SISTEMA
     
@@ -30,9 +30,6 @@ function f = sistemaDinamico130 (t,x)
         X = (Mo - M) / (Mo);
         
     % CONSTANTES CINÉTICAS
-    
-        B = -4;
-        C = -5;
         
         T = T3;
         R = Rjul;

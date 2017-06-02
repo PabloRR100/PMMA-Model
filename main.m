@@ -72,8 +72,13 @@ clear globals
         Mo  = p / PM;   % mol/L ( densidad / PM) 
         Vo  = 0.9;      % L
 
+    global B
+    global C
+    
+        B = -4;
+        C = -5;
         
 % FUNCION PARA CALCULAR
 
-    %conversion
-    dpm110
+    conversion
+    %dpm110
