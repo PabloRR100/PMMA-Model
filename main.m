@@ -80,5 +80,4 @@ clear globals
         
 % FUNCION PARA CALCULAR
 
-    conversion
-    %dpm110
+    conversion      

@@ -1,4 +1,4 @@
-function conversion()
+function f = conversion()
 
     global tiempo
     global Rjul
@@ -78,5 +78,11 @@ function conversion()
     pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
     %pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
         % Estamos pintando mal, esto viene después del Módulo de Dist.
-    
+      
+        % Comentado porque lo estamos ejecutando desde main para ahorrar
+        % hacer conversion en cada prueba
+     dpm110(x1)
+%     dpm120(x2)
+%     dpm130(x3)
+   
 end
