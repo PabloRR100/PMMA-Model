@@ -93,7 +93,6 @@ function dpm110(x)
         M    = x(:,2);
         I2p2 = x(:,3);
         RT   = x(:,4) + 2.*x(:,5);
-        X    = (x(:,2) - Mo) ./ x(:,2);
     
     for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
@@ -101,6 +100,7 @@ function dpm110(x)
 
             T = T1;
             R = Rjul;
+            X    = (x(t,2) - Mo) ./ x(t,2);
             k = constantes(X, T, R, B, C);
 
             kd  = k(1);

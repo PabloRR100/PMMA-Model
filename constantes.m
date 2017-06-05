@@ -24,7 +24,7 @@ function k = constantes(X, T, R, B, C)
 
     %k(6) = 0;                                          % Solo desproporción
     k(6) = 0.9 * k(5);                                 % Matthew Justin
-    %k(6) = (X/(1-X)) * k(6);
+    %k(6) = (X/(1-X)) * k(5);                          % Pablo 2
     %k(6) = 3.956*10^4 * exp(17096/(R*T));             % Bevington
     %k(6) = k(7);                                       % Hacerlas iguales
 

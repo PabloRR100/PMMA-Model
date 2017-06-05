@@ -81,7 +81,7 @@ function f = conversion()
       
         % Comentado porque lo estamos ejecutando desde main para ahorrar
         % hacer conversion en cada prueba
-     dpm110(x1)
+%     dpm110(x1)
 %     dpm120(x2)
 %     dpm130(x3)
    
