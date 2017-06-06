@@ -8,11 +8,11 @@ function dpm110(x)
     global Mo
     global Vo
     global nmax
-    
-    nmax = 1000;           % Máxima longitud de cadena
+
+    nmax = 1000;            % Máxima longitud de cadena
     long = length(tiempo);  % Longitud de los vectores de variables (t)
     V = Vo;
-    
+
     denominador(1:long) = 0;      % Inicializar denominador con el tamaño del vector tiempo
     alp(1:long) = 0;              % Inicializar alp con el tamaños del vector tiempo
 
@@ -45,8 +45,8 @@ function dpm110(x)
             r8 = zeros(1, nmax);
 
                 % Generación de monoradicales por desproporción
-        
-                   %termDrn = Monoradical con n grupos peróxidos por Desproporción 
+
+                   %termdrn = Monoradical con n grupos peróxidos por Desproporción 
                     termdr0 = zeros(1, nmax-1);
                     termdr1 = zeros(1, nmax-1);
                     termdr2 = zeros(1, nmax-1);
@@ -59,18 +59,18 @@ function dpm110(x)
 
         % Polímeros --> Inicializamos a 0
 
-           %pn = Polímero con n grupos peróxidos
-            p0 = zeros(long, nmax);
-            p1 = zeros(long, nmax);
-            p2 = zeros(long, nmax);
-            p3 = zeros(long, nmax);
-            p4 = zeros(long, nmax);
-            p5 = zeros(long, nmax);
-            p6 = zeros(long, nmax);
-            p7 = zeros(long, nmax);
-            p8 = zeros(long, nmax);
-            
-               %N grupos peróxidos sin descomponer
+           %genPn = Término de --> Generación de Polímero con n grupos peróxidos
+            genP0 = zeros(long, nmax);
+            genP1 = zeros(long, nmax);
+            genP2 = zeros(long, nmax);
+            genP3 = zeros(long, nmax);
+            genP4 = zeros(long, nmax);
+            genP5 = zeros(long, nmax);
+            genP6 = zeros(long, nmax);
+            genP7 = zeros(long, nmax);
+            genP8 = zeros(long, nmax);
+
+               %NPSn --> Moles de Polímero con N grupos peróxidos sin descomponer
                 NPS0 = zeros(long, nmax);
                 NPS1 = zeros(long, nmax);
                 NPS2 = zeros(long, nmax);
@@ -80,22 +80,23 @@ function dpm110(x)
                 NPS6 = zeros(long, nmax);
                 NPS7 = zeros(long, nmax);
                 NPS8 = zeros(long, nmax);
-            
+
 
     % Cálculo
-    
+
         M    = x(:,2);
         I2p2 = x(:,3);
         RT   = x(:,4) + 2.*x(:,5);
-    
+        X    = (Mo - x(:,2)) / Mo;
+
     for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
         % Constantes cinéticas
 
             T = T1;
             R = Rjul;
-            X    = (x(t,2) - Mo) ./ x(t,2);
-            k = constantes(X, T, R, B, C);
+            %X    = (x(t,2) - Mo) ./ x(t,2); % Voy a sacar la X como vector
+            k = constantes(X(t), T, R, B, C);
 
             kd  = k(1);
             ki0 = k(2);
@@ -112,30 +113,30 @@ function dpm110(x)
 
             % Diradicales
 
-                %R0(1) = 2*ki1*I2p0(t)*M(t) / denominador(t);
-                %R1(1) = 2*ki1*I2p1(t)*M(t) / denominador(t);
+                %R0(1) = 2*ki1*I2p0(t)*M(t) / denominador(t); % Si hay iniciador monofuncional
+                %R1(1) = 2*ki1*I2p1(t)*M(t) / denominador(t); % Si hay iniciador difuncional
                 R2(1) = 2*ki1*I2p2(t)*M(t) / denominador(t);
 
             % Monoradicales
 
-                %r0(1) = (ki1*Ip0(t) + ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);
-                %r1(1) = (ki1*Ip1(t) + ki0 + 2*kfM*R1(t)) * M(t) / denominador(t);
+                %r0(1) = (ki1*Ip0(t) + ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);  % Si hay iniciador monofuncional
+                %r1(1) = (ki1*Ip1(t) + ki0 + 2*kfM*R1(t)) * M(t) / denominador(t);  % Si hay iniciador difuncional
                 r2(1) = (ki1*I2p2(t) + ki0 + 2*kfM*R2(t)) * M(t) / denominador(t);
 
             % Polímeros
 
-                p0(t,1) = kfM*r0(1)*M(t);
-                p1(t,1) = kfM*r1(1)*M(t);
-                p2(t,1) = kfM*r2(1)*M(t);
-                p3(t,1) = kfM*r3(1)*M(t);
-                p4(t,1) = kfM*r4(1)*M(t);
-                p5(t,1) = kfM*r5(1)*M(t);
-                p6(t,1) = kfM*r6(1)*M(t);
-                p7(t,1) = kfM*r7(1)*M(t);
-                p8(t,1) = kfM*r8(1)*M(t);
-              
+                genP0(t,1) = kfM*r0(1)*M(t);
+                genP1(t,1) = kfM*r1(1)*M(t);
+                genP2(t,1) = kfM*r2(1)*M(t);
+                genP3(t,1) = kfM*r3(1)*M(t);
+                genP4(t,1) = kfM*r4(1)*M(t);
+                genP5(t,1) = kfM*r5(1)*M(t);
+                genP6(t,1) = kfM*r6(1)*M(t);
+                genP7(t,1) = kfM*r7(1)*M(t);
+                genP8(t,1) = kfM*r8(1)*M(t);
+
         % Generación de diradicales por terminación (Solo combinación)
-              
+
             termcR0 = ktc / (kp*M(t)) * (  conv(R0, R0));
             termcR1 = ktc / (kp*M(t)) * (2*conv(R0, R1));
             termcR2 = ktc / (kp*M(t)) * (2*conv(R2, R0) +   conv(R1, R1));
@@ -145,9 +146,9 @@ function dpm110(x)
             termcR6 = ktc / (kp*M(t)) * (2*conv(R6, R0) + 2*conv(R5, R1) + 2*conv(R4, R2) +   conv(R3, R3));
             termcR7 = ktc / (kp*M(t)) * (2*conv(R7, R0) + 2*conv(R6, R1) + 2*conv(R5, R2) + 2*conv(R4, R3));
             termcR8 = ktc / (kp*M(t)) * (2*conv(R8, R0) + 2*conv(R7, R1) + 2*conv(R6, R2) + 2*conv(R5, R3) + conv(R4, R4));
-                
+
         % Generación de monoradicales por terminación por combinación
-              
+
             termcr0 = 2*ktc / (kp*M(t)) * (conv(R0, r0));
             termcr1 = 2*ktc / (kp*M(t)) * (conv(R1, r0) + conv(R0, r1));
             termcr2 = 2*ktc / (kp*M(t)) * (conv(R2, r0) + conv(R1, r1) + conv(R0, r2));
@@ -157,19 +158,8 @@ function dpm110(x)
             termcr6 = 2*ktc / (kp*M(t)) * (conv(R6, r0) + conv(R5, r1) + conv(R4, r5) + conv(R3, r3) + conv(R2, r4) + conv(R1, r5) + conv(R0, r6));
             termcr7 = 2*ktc / (kp*M(t)) * (conv(R7, r0) + conv(R6, r1) + conv(R5, r6) + conv(R4, r3) + conv(R3, r4) + conv(R2, r5) + conv(R1, r6) + conv(R0, r7));
             termcr8 = 2*ktc / (kp*M(t)) * (conv(R8, r0) + conv(R7, r1) + conv(R6, r7) + conv(R5, r3) + conv(R4, r4) + conv(R3, r5) + conv(R2, r6) + conv(R1, r7) + conv(R0, r8));
-                
-        % Generación de monoradicales ¿¿??
-        
-%             genr1 = zeros(nmax-1, 1:1);
-%             genr2 = zeros(nmax-1, 1:2);
-%             genr3 = zeros(nmax-1, 1:3);
-%             genr4 = zeros(nmax-1, 1:4);
-%             genr5 = zeros(nmax-1, 1:5);
-%             genr6 = zeros(nmax-1, 1:6);
-%             genr7 = zeros(nmax-1, 1:7);
-%             genr8 = zeros(nmax-1, 1:8);
-            
-            
+
+
         for n = 2:nmax                      % Bucle para sacar el n a partir del n-1 de diradicales
 
             % Diradicales en cada t (no se almacenan)
@@ -209,9 +199,9 @@ function dpm110(x)
                 r8(n) = (r8(n-1) + termdr8(n) + 2*kfM/kp*R8(n) + termcr8(n-1)) / alp(t);           
 
         end
-        
+
         % Generación de cadena de polímero por terminación por combinación
-            
+
             termp0 = 0.5*ktc * (  conv(r0, r0));
             termp1 = 0.5*ktc * (2*conv(r1, r0));
             termp2 = 0.5*ktc * (2*conv(r2, r0) + conv(r1,r1));
@@ -221,35 +211,35 @@ function dpm110(x)
             termp6 = 0.5*ktc * (  conv(r6, r0) + conv(r5,r1) + conv(r4,r2) + conv(r3,r3));
             termp7 = 0.5*ktc * (  conv(r7, r0) + conv(r6,r1) + conv(r5,r2) + conv(r4,r3));
             termp8 = 0.5*ktc * (  conv(r8, r0) + conv(r7,r1) + conv(r6,r2) + conv(r5,r3) + conv(r4,r4));
-            
-        
+
+
         for n = 2:nmax
-                
+
              % GENERACIÓN Polímero en cada t
 
-                p0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
-                p1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
-                p2(t,n) = kfM*r2(n)*M(t) + termp2(n-1) + ktd*r2(n)*RT(t);
-                p3(t,n) = kfM*r3(n)*M(t) + termp3(n-1) + ktd*r3(n)*RT(t);
-                p4(t,n) = kfM*r4(n)*M(t) + termp4(n-1) + ktd*r4(n)*RT(t);
-                p5(t,n) = kfM*r5(n)*M(t) + termp5(n-1) + ktd*r5(n)*RT(t);
-                p6(t,n) = kfM*r6(n)*M(t) + termp6(n-1) + ktd*r6(n)*RT(t);
-                p7(t,n) = kfM*r7(n)*M(t) + termp7(n-1) + ktd*r7(n)*RT(t);
-                p8(t,n) = kfM*r8(n)*M(t) + termp8(n-1) + ktd*r8(n)*RT(t);
+                genP0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
+                genP1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
+                genP2(t,n) = kfM*r2(n)*M(t) + termp2(n-1) + ktd*r2(n)*RT(t);
+                genP3(t,n) = kfM*r3(n)*M(t) + termp3(n-1) + ktd*r3(n)*RT(t);
+                genP4(t,n) = kfM*r4(n)*M(t) + termp4(n-1) + ktd*r4(n)*RT(t);
+                genP5(t,n) = kfM*r5(n)*M(t) + termp5(n-1) + ktd*r5(n)*RT(t);
+                genP6(t,n) = kfM*r6(n)*M(t) + termp6(n-1) + ktd*r6(n)*RT(t);
+                genP7(t,n) = kfM*r7(n)*M(t) + termp7(n-1) + ktd*r7(n)*RT(t);
+                genP8(t,n) = kfM*r8(n)*M(t) + termp8(n-1) + ktd*r8(n)*RT(t);
 
                 % MOLES de polímero 
-                NPS0(n+1,1) = NPS0(n,1) + p0(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS1(n+1,1) = NPS1(n,1) + p1(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS2(n+1,1) = NPS2(n,1) + p2(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS3(n+1,1) = NPS3(n,1) + p3(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS4(n+1,1) = NPS4(n,1) + p4(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS5(n+1,1) = NPS5(n,1) + p5(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS6(n+1,1) = NPS6(n,1) + p6(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS7(n+1,1) = NPS7(n,1) + p7(t,n)*V*(tiempo(t+1)-tiempo(t));
-                NPS8(n+1,1) = NPS8(n,1) + p8(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS0(t+1,n) = NPS0(t,n) + genP0(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS1(t+1,n) = NPS1(t,n) + genP1(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS2(t+1,n) = NPS2(t,n) + genP2(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS3(t+1,n) = NPS3(t,n) + genP3(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS4(t+1,n) = NPS4(t,n) + genP4(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS5(t+1,n) = NPS5(t,n) + genP5(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS6(t+1,n) = NPS6(t,n) + genP6(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS7(t+1,n) = NPS7(t,n) + genP7(t,n)*V*(tiempo(t+1)-tiempo(t));
+                NPS8(t+1,n) = NPS8(t,n) + genP8(t,n)*V*(tiempo(t+1)-tiempo(t));
 
         end
-            
+
         NPS0(NPS0<0)=0;
         NPS1(NPS1<0)=0;
         NPS2(NPS2<0)=0;
