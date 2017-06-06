@@ -80,4 +80,4 @@ clear globals
         
 % FUNCION PARA CALCULAR
 
-    conversion      
+    %conversion      
