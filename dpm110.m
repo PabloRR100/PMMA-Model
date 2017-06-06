@@ -160,7 +160,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
         termcr8 = 2*ktc / (kp*M(t)) * (conv(R8, r0) + conv(R7, r1) + conv(R6, r7) + conv(R5, r3) + conv(R4, r4) + conv(R3, r5) + conv(R2, r6) + conv(R1, r7) + conv(R0, r8));
 
 
-    for n = 2:nmax                      % Bucle para sacar el n a partir del n-1 de diradicales
+    for n = 2:nmax                      % Bucle para sacar el n a partir del n-1 de radicales
 
         % Diradicales en cada t (no se almacenan)
 
@@ -215,7 +215,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
     for n = 2:nmax
 
-         % GENERACIÓN Polímero en cada t
+         % Término de GENERACIÓN de Polímero de longitud de cadena n en cada t
 
             genP0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
             genP1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
