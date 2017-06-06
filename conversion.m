@@ -1,4 +1,4 @@
-function f = conversion()
+function conversion()
 
     global tiempo
     global Rjul
@@ -12,7 +12,8 @@ function f = conversion()
     to = 0;         % s
     tf = 5400;      % s 
 
-    tiempo  = linspace(to, tf, 100000);     % Vector tiempo de reacción
+    %tiempo  = linspace(to, tf, 100000);     % Vector tiempo de reacción
+    tiempo  = linspace(to, tf, 100);     % Vector tiempo de reacción
     step = 100;                             % Máximo intervalo de tiempo que se dará a ODE
 
     inicial = zeros(1, 7);  % Vector iniciado a 0 de las 8 variables del sistema
@@ -75,13 +76,13 @@ function f = conversion()
     
     %pintarIniciador(t2, iniciador120, iniciador130)
        
-    pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
+    %pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
     %pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
         % Estamos pintando mal, esto viene despu�s del M�dulo de Dist.
       
         % Comentado porque lo estamos ejecutando desde main para ahorrar
         % hacer conversion en cada prueba
-%     dpm110(x1)
+     dpm110(x1)
 %     dpm120(x2)
 %     dpm130(x3)
    
