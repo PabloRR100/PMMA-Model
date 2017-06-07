@@ -22,7 +22,7 @@ function f = sistemaDinamico110(t,x)
         R1   = x(4);        % x(4) -> Monoradicales
         R2   = x(5);        % x(5) -> Diradicales
 
-        P    = x(6);        % x(6) -> Polimero 
+        %P    = x(6);        % x(6) -> Polimero 
 
         PeP  = x(7);        % x(7) -> Peroxidos totales en PMMA
 
@@ -60,7 +60,7 @@ function f = sistemaDinamico110(t,x)
         f(5) = 2*(ki1*I2p2 - kfM*R2)*M - 2*ktc*R2*Rt - 2*ktd*R2*(R1+2*R2);
                             % Evolucion de P                                        - A.16
         %f(6) = kfM*M*R1 + ktc/2*R1^2 + 2*ktd*R1*(R1*R2) - kd*PeP;
-        f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
+        %f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
                             % Evolucion de PeP                                      - A.23
         f(7) = ki1*I2p2*M - kd*PeP;
 

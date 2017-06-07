@@ -1,6 +1,6 @@
 
 global tiempo
-global T1
+global T3
 global Rjul
 global B
 global C
@@ -8,8 +8,8 @@ global Mo
 global Vo
 global nmax
 
-x = x1;
-nmax = 1000;            % Máxima longitud de cadena
+x = x3;
+nmax = 10000;            % Máxima longitud de cadena
 long = length(tiempo);  % Longitud de los vectores de variables (t)
 V = Vo;
 
@@ -93,7 +93,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
     % Constantes cinéticas
 
-        T = T1;
+        T = T3;
         R = Rjul;
         k = constantes(X(t), T, R, B, C);
 
@@ -105,7 +105,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
         ktc = k(6);
         kfM = k(7);
 
-        denominador(t) = (kp+kfM)*M(t) + (ktc+ktd)*(RT(t));   % Factor común al radical
+        denominador(t) = (kp+kfM)*M(t) + (ktc+ktd)*RT(t);     % Factor común al radical
         alp(t) = denominador(t) / (kp*M(t));                  % Para poner 1 sobre kp*M(t)
 
     % Dar el valor inicial antes del bucle;
@@ -118,9 +118,9 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
         % Monoradicales
 
-            %r0(1) = (ki1*Ip0(t) + ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);  % Si hay iniciador monofuncional
+            r0(1) = (ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);  % Si hay iniciador monofuncional
             %r1(1) = (ki1*Ip1(t) + ki0 + 2*kfM*R1(t)) * M(t) / denominador(t);  % Si hay iniciador difuncional
-            r2(1) = (ki1*I2p2(t) + ki0 + 2*kfM*R2(t)) * M(t) / denominador(t);
+            r2(1) = (2*kfM*R2(t)) * M(t) / denominador(t);
 
         % Polímeros
 
@@ -172,7 +172,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
             R6(n) = (R6(n-1) + termcR6(n-1)) / alp(t);
             R7(n) = (R7(n-1) + termcR7(n-1)) / alp(t);
             R8(n) = (R8(n-1) + termcR8(n-1)) / alp(t);
-
+           
             % Generación de monoradicales por terminación por desproporción (no se almacenan)
 
                 termdr0(n) = 2*ktd / (kp*M(t)) * R0(n)*RT(t);
@@ -250,4 +250,3 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
     NPS8(NPS8<0)=0;
 
 end
-

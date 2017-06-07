@@ -18,7 +18,7 @@ GPS8(1:length(t),1:nmax)=0;
 NPS(1:length(t))=0;
 GPS(1:length(t))=0;
 Mn(1:length(t))=0;
-Mw(1:length(t))=0;
+Mw(1:length(t))=0;x
 D(1:length(t))=0;
 PeP2(1:length(t))=0;
 
@@ -48,4 +48,4 @@ for i=2:length(t)
 
 end
 
-plot(t,Mn(:),'r',t,Mw(:),'b');
+plot(t/60,Mn(:),'r',t/60,Mw(:),'b');

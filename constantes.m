@@ -28,8 +28,10 @@ function k = constantes(X, T, R, B, C)
     %k(6) = 3.956*10^4 * exp(17096/(R*T));             % Bevington
     %k(6) = k(7);                                       % Hacerlas iguales
 
-    %k(7) = 0.9;                                      % Emilio
-    k(7)  = 2.41 * 10^9 * exp(-2930.180/(R*T));      % Matthew Justin
+    %k(7) = 0.6;                                      % sdfghj
+    k(7)  = 0.05;
+    %k(7) = k(4) * 9480 * exp(-58113/(R*T));
+    %k(7)  = 2.41 * 10^9 * exp(-2930.180/(R*T));      % Matthew Justin
 
 
 

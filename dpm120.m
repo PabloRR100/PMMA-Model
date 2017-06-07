@@ -1,6 +1,6 @@
 
 global tiempo
-global T1
+global T2
 global Rjul
 global B
 global C
@@ -8,7 +8,7 @@ global Mo
 global Vo
 global nmax
 
-x = x1;
+x = x2;
 nmax = 1000;            % Máxima longitud de cadena
 long = length(tiempo);  % Longitud de los vectores de variables (t)
 V = Vo;
@@ -93,7 +93,7 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
     % Constantes cinéticas
 
-        T = T1;
+        T = T2;
         R = Rjul;
         k = constantes(X(t), T, R, B, C);
 
@@ -250,4 +250,3 @@ for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
     NPS8(NPS8<0)=0;
 
 end
-
