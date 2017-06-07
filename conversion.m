@@ -73,15 +73,11 @@ rp130         = kp130 .* monomero130 .* radicales130;   % Rp(t)         a 130ºC
 
 % Creación del gráfico
 
-%pintarIniciador(t2, iniciador120, iniciador130)
+    pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
 
-%pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
-%pintarPolimero(t1, polimero110, polimero120, polimero130, PeP110, PeP120, PeP130)
-    % Estamos pintando mal, esto viene después del Módulo de Dist.
-
-    % Comentado porque lo estamos ejecutando desde main para ahorrar
-    % hacer conversion en cada prueba
-%     dpm110(x1)
-%     dpm120(x2)
-%     dpm130(x3)
+        % Comentado porque lo estamos ejecutando desde main para ahorrar
+        % hacer conversion en cada prueba
+    %     dpm110(x1)
+    %     dpm120(x2)
+    %     dpm130(x3)
 

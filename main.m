@@ -12,11 +12,6 @@ clear globals
     global tiempos130
     global convers130
     
-%     global tInic120
-%     global iniciador120
-%     
-%     global tInic130
-%     global iniciador130
     
     datosMejico = '/Users/pablorr10/OneDrive/UNIVERSIDAD/Ingeniería Química/MIQ/PROYECTO/Matlab/data/Resultados de Pablo.xlsx';
     
@@ -26,11 +21,6 @@ clear globals
         [convers120, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D25:D34');
         [tiempos130, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'B42:B51');
         [convers130, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D42:D51');
-
-%         [tInic120, ~, ~]     = xlsread(datosMejico, 'DescomposicionDEKTP', 'B32:B35'); 
-%         [iniciador120, ~, ~] = xlsread(datosMejico, 'DescomposicionDEKTP', 'D32:D35'); 
-%         [tInic130, ~, ~]     = xlsread(datosMejico, 'DescomposicionDEKTP', 'B21:B25'); 
-%         [iniciador130, ~, ~] = xlsread(datosMejico, 'DescomposicionDEKTP', 'D21:D25'); 
     
         
         
@@ -43,9 +33,6 @@ clear globals
 
     global ef
         ef = 0.75;
-        
-%     global B
-%     global C
 
 
 % DEFINICION DE LAS VARIABLES DEL SISTEMA
