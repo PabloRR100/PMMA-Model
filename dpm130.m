@@ -1,5 +1,6 @@
 
 global tiempo
+    tiempo = t3;
 global T3
 global Rjul
 global B

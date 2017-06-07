@@ -12,8 +12,9 @@ to = 0;         % s
 tf = 5400;      % s 
 
 %tiempo  = linspace(to, tf, 100000);     % Vector tiempo de reacción
-tiempo  = linspace(to, tf, 100);     % Vector tiempo de reacción
+%tiempo  = linspace(to, tf, 100);       % Vector tiempo de reacción
 step = 100;                             % Máximo intervalo de tiempo que se dará a ODE
+tiempo = [0 tf];
 
 inicial = zeros(1, 7);  % Vector iniciado a 0 de las 8 variables del sistema
 inicial(1) = I3o;
@@ -73,7 +74,7 @@ rp130         = kp130 .* monomero130 .* radicales130;   % Rp(t)         a 130�C
 
 % Creaci�n del gr�fico
 
-    pintarConversiones(t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
+    pintarConversiones(t1, t2, t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
 
         % Comentado porque lo estamos ejecutando desde main para ahorrar
         % hacer conversion en cada prueba
