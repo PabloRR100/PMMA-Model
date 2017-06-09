@@ -13,7 +13,7 @@ function k = constantes(X, T, R, B, C)
     k(2)  = 2.8711 * 10^-11;  % Emilio
     k(3)  = 4.92 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
 
-    k(4)  = 4.92 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
+    k(4)  = 4 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
     %k(4)  = 4.92 * 10^7 * exp(-18153.74/(R*T));      % Matthew Justin --> SE DISPARA MUCHISIMO
 
     %k(5)  = 9.80 * 10^7 * exp(-2930.180/(R*T));      % Mahabadi

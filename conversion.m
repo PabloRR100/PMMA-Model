@@ -76,9 +76,4 @@ rp130         = kp130 .* monomero130 .* radicales130;   % Rp(t)         a 130ºC
 
     pintarConversiones(t1, t2, t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
 
-        % Comentado porque lo estamos ejecutando desde main para ahorrar
-        % hacer conversion en cada prueba
-    %     dpm110(x1)
-    %     dpm120(x2)
-    %     dpm130(x3)
 
