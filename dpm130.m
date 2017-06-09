@@ -1,5 +1,4 @@
-function [Mn, Mw, X] = dpm110(tiempo, x, T)
-
+function [Mn, Mw, X] = dpm130(tiempo, x, T)
 
     global Rjul
     global B
@@ -8,17 +7,17 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
     global Vo
     global nmax
 
-    long = length(tiempo);   % Longitud de los vectores de variables (t)
+    long = length(tiempo);  % Longitud de los vectores de variables (t)
     V = Vo;
 
-    denominador(1:long) = 0;      % Inicializar denominador con el tama帽o del vector tiempo
-    alp(1:long) = 0;              % Inicializar alp con el tama帽os del vector tiempo
+    denominador(1:long) = 0;      % Inicializar denominador con el tama駉 del vector tiempo
+    alp(1:long) = 0;              % Inicializar alp con el tama駉s del vector tiempo
 
     % Vectores de las especies
 
         % Diradicales --> Inicializamos a 0
 
-           %Rn = Diradical con N grupos per贸xidos
+           %Rn = Diradical con N grupos per髕idos
             R0 = zeros(1, nmax);
             R1 = zeros(1, nmax);
             R2 = zeros(1, nmax);
@@ -31,7 +30,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
         % Monoradicales --> Inicializamos a 0
 
-           %rn = Monoradical con n grupos per贸xidos
+           %rn = Monoradical con n grupos per髕idos
             r0 = zeros(1, nmax);
             r1 = zeros(1, nmax);
             r2 = zeros(1, nmax);
@@ -42,9 +41,9 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
             r7 = zeros(1, nmax);
             r8 = zeros(1, nmax);
 
-                % Generaci贸n de monoradicales por desproporci贸n
+                % Generaci髇 de monoradicales por desproporci髇
 
-                   %termdrn = Monoradical con n grupos per贸xidos por Desproporci贸n 
+                   %termdrn = Monoradical con n grupos per髕idos por Desproporci髇 
                     termdr0 = zeros(1, nmax-1);
                     termdr1 = zeros(1, nmax-1);
                     termdr2 = zeros(1, nmax-1);
@@ -55,9 +54,9 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
                     termdr7 = zeros(1, nmax-1);
                     termdr8 = zeros(1, nmax-1);
 
-        % Pol铆meros --> Inicializamos a 0
+        % Pol韒eros --> Inicializamos a 0
 
-           %genPn = T茅rmino de --> Generaci贸n de Pol铆mero con n grupos per贸xidos
+           %genPn = T閞mino de --> Generaci髇 de Pol韒ero con n grupos per髕idos
             genP0 = zeros(long, nmax);
             genP1 = zeros(long, nmax);
             genP2 = zeros(long, nmax);
@@ -68,7 +67,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
             genP7 = zeros(long, nmax);
             genP8 = zeros(long, nmax);
 
-               %NPSn --> Moles de Pol铆mero con N grupos per贸xidos sin descomponer
+               %NPSn --> Moles de Pol韒ero con N grupos per髕idos sin descomponer
                 NPS0 = zeros(long, nmax);
                 NPS1 = zeros(long, nmax);
                 NPS2 = zeros(long, nmax);
@@ -80,7 +79,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
                 NPS8 = zeros(long, nmax);
 
 
-    % C谩lculo
+    % C醠culo
 
         M    = x(:,2);
         I2p2 = x(:,3);
@@ -89,10 +88,9 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
     for t = 1:long-1                    % BUCLE PARA AVANZAR EN EL TIEMPO
 
-        % Constantes cin茅ticas
+        % Constantes cin閠icas
 
             R = Rjul;
-
             k = constantes(X(t), T, R, B, C);
 
             ki0 = k(2);
@@ -102,7 +100,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
             ktc = k(6);
             kfM = k(7);
 
-            denominador(t) = (kp+kfM)*M(t) + (ktc+ktd)*RT(t);     % Factor com煤n al radical
+            denominador(t) = (kp+kfM)*M(t) + (ktc+ktd)*RT(t);     % Factor com鷑 al radical
             alp(t) = denominador(t) / (kp*M(t));                  % Para poner 1 sobre kp*M(t)
 
         % Dar el valor inicial antes del bucle;
@@ -115,13 +113,12 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
             % Monoradicales
 
-                %       r0(1) = (ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);  % Si hay iniciador monofuncional
-                r0(1) = (ki0 + kfM*RT(t)) * M(t) / denominador(t);
+                       r0(1) = (ki0 + 2*kfM*R0(t)) * M(t) / denominador(t);  % Si hay iniciador monofuncional
+                %r0(1) = (ki0 + kfM*RT(t)) * M(t) / denominador(t);
                 %r1(1) = (ki1*Ip1(t) + ki0 + 2*kfM*R1(t)) * M(t) / denominador(t);  % Si hay iniciador difuncional
                 r2(1) = (2*kfM*R2(t)) * M(t) / denominador(t);
 
-
-            % Pol铆meros
+            % Pol韒eros
 
                 genP0(t,1) = kfM*r0(1)*M(t);
                 genP1(t,1) = kfM*r1(1)*M(t);
@@ -133,7 +130,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
                 genP7(t,1) = kfM*r7(1)*M(t);
                 genP8(t,1) = kfM*r8(1)*M(t);
 
-        % Generaci贸n de diradicales por terminaci贸n (Solo combinaci贸n)
+        % Generaci髇 de diradicales por terminaci髇 (Solo combinaci髇)
 
             termcR0 = ktc / (kp*M(t)) * (  conv(R0, R0));
             termcR1 = ktc / (kp*M(t)) * (2*conv(R0, R1));
@@ -145,7 +142,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
             termcR7 = ktc / (kp*M(t)) * (2*conv(R7, R0) + 2*conv(R6, R1) + 2*conv(R5, R2) + 2*conv(R4, R3));
             termcR8 = ktc / (kp*M(t)) * (2*conv(R8, R0) + 2*conv(R7, R1) + 2*conv(R6, R2) + 2*conv(R5, R3) + conv(R4, R4));
 
-        % Generaci贸n de monoradicales por terminaci贸n por combinaci贸n
+        % Generaci髇 de monoradicales por terminaci髇 por combinaci髇
 
             termcr0 = 2*ktc / (kp*M(t)) * (  conv(R0, r0));
             termcr1 = 2*ktc / (kp*M(t)) * (2*conv(R1, r0) + 2*conv(R0, r1));
@@ -172,7 +169,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
                 R7(n) = (R7(n-1) + termcR7(n-1)) / alp(t);
                 R8(n) = (R8(n-1) + termcR8(n-1)) / alp(t);
 
-                % Generaci贸n de monoradicales por terminaci贸n por desproporci贸n (no se almacenan)
+                % Generaci髇 de monoradicales por terminaci髇 por desproporci髇 (no se almacenan)
 
                     termdr0(n) = 2*ktd / (kp*M(t)) * R0(n)*RT(t);
                     termdr1(n) = 2*ktd / (kp*M(t)) * R1(n)*RT(t);
@@ -198,7 +195,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
         end
 
-        % Generaci贸n de cadena de pol铆mero por terminaci贸n por combinaci贸n
+        % Generaci髇 de cadena de pol韒ero por terminaci髇 por combinaci髇
 
             termp0 = 0.5*ktc * (  conv(r0, r0));
             termp1 = 0.5*ktc * (2*conv(r1, r0));
@@ -213,7 +210,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
         for n = 2:nmax
 
-             % T茅rmino de GENERACI脫N de Pol铆mero de longitud de cadena n en cada t
+             % T閞mino de GENERACI覰 de Pol韒ero de longitud de cadena n en cada t
 
                 genP0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
                 genP1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
@@ -225,7 +222,7 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
                 genP7(t,n) = kfM*r7(n)*M(t) + termp7(n-1) + ktd*r7(n)*RT(t);
                 genP8(t,n) = kfM*r8(n)*M(t) + termp8(n-1) + ktd*r8(n)*RT(t);
 
-                % MOLES de pol铆mero 
+                % MOLES de pol韒ero 
                 NPS0(t+1,n) = NPS0(t,n) + genP0(t,n)*V*(tiempo(t+1)-tiempo(t));
                 NPS1(t+1,n) = NPS1(t,n) + genP1(t,n)*V*(tiempo(t+1)-tiempo(t));
                 NPS2(t+1,n) = NPS2(t,n) + genP2(t,n)*V*(tiempo(t+1)-tiempo(t));
@@ -250,6 +247,6 @@ function [Mn, Mw, X] = dpm110(tiempo, x, T)
 
     end
     
-    [Mn, Mw] = pesos110(tiempo, NPS0, NPS1, NPS2, NPS3, NPS4, NPS5, NPS6, NPS7, NPS8);
-
+    [Mn, Mw] = pesos130(tiempo, NPS0, NPS1, NPS2, NPS3, NPS4, NPS5, NPS6, NPS7, NPS8);
+    
 end
