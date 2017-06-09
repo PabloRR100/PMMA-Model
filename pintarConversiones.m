@@ -16,12 +16,12 @@ function pintarConversiones(t1, t2, t3, x110, x120, x130, r110, r120, r130)
         plot(t1/60, x110*100, 'g')
         plot(t2/60, x120*100, 'b')
         plot(t3/60, x130*100, 'r')
-    title('Evolución de la Conversión')
-    xlabel('Tiempo en el reactor (min)')
-    ylabel('Conversión (%)')
-    ylim([0 100]);
-    legend('Experimental 110ºC', 'Experimental 120ºC', 'Experimental 130ºC', 'Modelo 110ºC', 'Modelo 120ºC', 'Modelo 130ºC')
-    legend('Location','east')
+            title('Evolución de la Conversión')
+            xlabel('Tiempo en el reactor (min)')
+            ylabel('Conversión (%)')
+            ylim([0 100]);
+            legend('Experimental 110ºC', 'Experimental 120ºC', 'Experimental 130ºC', 'Modelo 110ºC', 'Modelo 120ºC', 'Modelo 130ºC')
+            legend('Location','east')
     
     hold off
     

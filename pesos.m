@@ -1,9 +1,11 @@
 
 global tiempo
+global PM
 global nmax
 
-t = tiempo;
+t = t3;
 n = 1:nmax;
+x = x3;
 
 GPS0(1:length(t),1:nmax)=0;
 GPS1(1:length(t),1:nmax)=0;
@@ -18,11 +20,11 @@ GPS8(1:length(t),1:nmax)=0;
 NPS(1:length(t))=0;
 GPS(1:length(t))=0;
 Mn(1:length(t))=0;
-Mw(1:length(t))=0;x
+Mw(1:length(t))=0;
 D(1:length(t))=0;
 PeP2(1:length(t))=0;
 
-Ms=100;%PM del St, g/mol
+Ms=PM;%PM del St, g/mol
 for i=2:length(t)
 
     for j=1:nmax
@@ -48,4 +50,4 @@ for i=2:length(t)
 
 end
 
-plot(t/60,Mn(:),'r',t/60,Mw(:),'b');
+pintarPesos(t, Mn, Mw)
