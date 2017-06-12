@@ -9,12 +9,12 @@ function k = constantes(X, T, R, B, C)
 %     kfM = k(7);
 
     %k(1)  = 1.4282 * 10^10 * exp(-99064.12/(R*T));   % Datos Mejico
-    k(1)  = 1.6*10^10 * exp(-111380/(R*T));
-    k(2)  = 2.8711 * 10^-11;  % Emilio
-    k(3)  = 4.92 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
+    k(1)  = 1.43 * 10^10 * exp(-111380/(R*T));         % Ajuste
+    %k(2)  = 2.8711 * 10^-11;  % Emilio
+    k(2) = 0;
+    k(3) = 4.92 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
 
-    k(4)  = 4 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
-    %k(4) = 5 * 10^6 * exp(-73580/(R*T));            % Datos Méjico
+    k(4)  = 4.92 * 10^5 * exp(-18195.54/(R*T));      % Mahabadi
     %k(4)  = 4.92 * 10^7 * exp(-18153.74/(R*T));      % Matthew Justin --> SE DISPARA MUCHISIMO
 
     %k(5)  = 9.80 * 10^7 * exp(-2930.180/(R*T));      % Mahabadi
