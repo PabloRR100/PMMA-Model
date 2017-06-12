@@ -43,9 +43,9 @@ function pintarConversiones(t1, t2, t3, x110, x120, x130, r110, r120, r130)
     pantalla = get(groot, 'ScreenSize');
     figure('Position',[pantalla(3)/2 0 pantalla(3)/2 pantalla(4)/2])
     hold on
-        plot(t/60, r110, 'g')
-        plot(t/60, r120, 'b')
-        plot(t/60, r130, 'r')
+        plot(t1/60, r110, 'g')
+        plot(t2/60, r120, 'b')
+        plot(t3/60, r130, 'r')
     title('Evolución de la Rp')
     xlabel('Tiempo en el reactor (min)')
     ylabel('Rp')
