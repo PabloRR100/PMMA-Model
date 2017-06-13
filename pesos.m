@@ -1,5 +1,4 @@
 
-global tiempo
 global PM
 global nmax
 

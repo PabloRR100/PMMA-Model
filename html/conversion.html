@@ -1,0 +1,212 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>conversion</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-13"><meta name="DC.source" content="conversion.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">global</span> tiempo
+<span class="keyword">global</span> Rjul
+<span class="keyword">global</span> T1
+<span class="keyword">global</span> T2
+<span class="keyword">global</span> T3
+
+<span class="keyword">global</span> Mo
+<span class="keyword">global</span> I3o
+
+to = 0;         <span class="comment">% s</span>
+tf = 5400;      <span class="comment">% s</span>
+
+tiempo = [to tf];
+step = 100;
+
+inicial = zeros(1, 7);  <span class="comment">% Vector iniciado a 0 de las 8 variables del sistema</span>
+inicial(1) = I3o;
+inicial(2) = Mo;
+
+[t1,x1] = ode23s(@(t,x)sistemaDinamico110(t,x), tiempo, inicial, odeset(<span class="string">'Maxstep'</span>, step)); <span class="comment">% 110 &ordm;C</span>
+[t2,x2] = ode23s(@(t,x)sistemaDinamico120(t,x), tiempo, inicial, odeset(<span class="string">'Maxstep'</span>, step)); <span class="comment">% 120 &ordm;C</span>
+[t3,x3] = ode23s(@(t,x)sistemaDinamico130(t,x), tiempo, inicial, odeset(<span class="string">'Maxstep'</span>, step)); <span class="comment">% 130 &ordm;C</span>
+
+
+k110 = constantes(0, T1, Rjul, 0, 0);
+    kp110 = k110(4);
+monomero110   = x1(:,2);                                <span class="comment">% Monomero(t)   a 110&ordm;C</span>
+polimero110   = x1(:,6);                                <span class="comment">% Polimero(t)   a 110&ordm;C</span>
+PeP110        = x1(:,7);                                <span class="comment">% PeP(t)        a 110&ordm;C</span>
+conversion110 = (Mo - monomero110(:))/Mo;               <span class="comment">% Conversion(t) a 110&ordm;C</span>
+
+rad110        = x1(:,4);                                <span class="comment">% R1(t)         a 110&ordm;C</span>
+rads110       = x1(:,5);                                <span class="comment">% R2(t)         a 110&ordm;C</span>
+radicales110  = rad110 + 2.*rads110;                    <span class="comment">% R(t) totales  a 110&ordm;C</span>
+rp110         = kp110 .* monomero110 .* radicales110;   <span class="comment">% Rp(t)         a 110&ordm;C</span>
+
+<span class="comment">% --- %</span>
+
+k120 = constantes(0, T2, Rjul, 0, 0);
+    kp120 = k120(4);
+monomero120   = x2(:,2);                                <span class="comment">% Monomero(t)   a 120&ordm;C</span>
+polimero120   = x2(:,6);                                <span class="comment">% Polimero(t)   a 120&ordm;C</span>
+PeP120        = x2(:,7);                                <span class="comment">% PeP(t)        a 120&ordm;C</span>
+conversion120 = (Mo - monomero120(:))/Mo;               <span class="comment">% Conversion(t) a 120&ordm;C</span>
+
+rad120        = x2(:,4);                                <span class="comment">% R1(t)         a 120&ordm;C</span>
+rads120       = x2(:,5);                                <span class="comment">% R2(t)         a 120&ordm;C</span>
+radicales120  = rad120 + 2.*rads120;                    <span class="comment">% R(t) totales  a 120&ordm;C</span>
+rp120         = kp120 .* monomero120 .* radicales120;   <span class="comment">% Rp(t)         a 120&ordm;C</span>
+
+<span class="comment">% --- %</span>
+
+k130 = constantes(0, T3, Rjul, 0, 0);
+    kp130 = k130(4);
+monomero130   = x3(:,2);                                <span class="comment">% Monomero(t)   a 130&ordm;C</span>
+polimero130   = x3(:,6);                                <span class="comment">% Polimero(t)   a 130&ordm;C</span>
+PeP130        = x3(:,7);                                <span class="comment">% PeP(t)        a 130&ordm;C</span>
+conversion130 = (Mo - monomero130(:))/Mo;               <span class="comment">% Conversion(t) a 130&ordm;C</span>
+
+rad130        = x3(:,4);                                <span class="comment">% R1(t)         a 130&ordm;C</span>
+rads130       = x3(:,5);                                <span class="comment">% R2(t)         a 130&ordm;C</span>
+radicales130  = rad130 + 2.*rads130;                        <span class="comment">% R(t) totales  a 130&ordm;C</span>
+rp130         = kp130 .* monomero130 .* radicales130;   <span class="comment">% Rp(t)         a 130&ordm;C</span>
+
+
+<span class="comment">% Creaci&oacute;n del gr&aacute;fico</span>
+
+    pintarConversiones(t1, t2, t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
+</pre><img vspace="5" hspace="5" src="conversion_01.png" style="width:560px;height:420px;" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+global tiempo
+global Rjul
+global T1
+global T2
+global T3
+
+global Mo
+global I3o
+
+to = 0;         % s
+tf = 5400;      % s 
+
+tiempo = [to tf];
+step = 100;                             
+
+inicial = zeros(1, 7);  % Vector iniciado a 0 de las 8 variables del sistema
+inicial(1) = I3o;
+inicial(2) = Mo;
+
+[t1,x1] = ode23s(@(t,x)sistemaDinamico110(t,x), tiempo, inicial, odeset('Maxstep', step)); % 110 ºC
+[t2,x2] = ode23s(@(t,x)sistemaDinamico120(t,x), tiempo, inicial, odeset('Maxstep', step)); % 120 ºC
+[t3,x3] = ode23s(@(t,x)sistemaDinamico130(t,x), tiempo, inicial, odeset('Maxstep', step)); % 130 ºC
+
+
+k110 = constantes(0, T1, Rjul, 0, 0);
+    kp110 = k110(4);
+monomero110   = x1(:,2);                                % Monomero(t)   a 110ºC
+polimero110   = x1(:,6);                                % Polimero(t)   a 110ºC
+PeP110        = x1(:,7);                                % PeP(t)        a 110ºC
+conversion110 = (Mo - monomero110(:))/Mo;               % Conversion(t) a 110ºC
+
+rad110        = x1(:,4);                                % R1(t)         a 110ºC
+rads110       = x1(:,5);                                % R2(t)         a 110ºC
+radicales110  = rad110 + 2.*rads110;                    % R(t) totales  a 110ºC
+rp110         = kp110 .* monomero110 .* radicales110;   % Rp(t)         a 110ºC
+
+% REPLACE_WITH_DASH_DASH- %
+
+k120 = constantes(0, T2, Rjul, 0, 0);
+    kp120 = k120(4);
+monomero120   = x2(:,2);                                % Monomero(t)   a 120ºC
+polimero120   = x2(:,6);                                % Polimero(t)   a 120ºC
+PeP120        = x2(:,7);                                % PeP(t)        a 120ºC
+conversion120 = (Mo - monomero120(:))/Mo;               % Conversion(t) a 120ºC
+
+rad120        = x2(:,4);                                % R1(t)         a 120ºC
+rads120       = x2(:,5);                                % R2(t)         a 120ºC
+radicales120  = rad120 + 2.*rads120;                    % R(t) totales  a 120ºC
+rp120         = kp120 .* monomero120 .* radicales120;   % Rp(t)         a 120ºC
+
+% REPLACE_WITH_DASH_DASH- %
+
+k130 = constantes(0, T3, Rjul, 0, 0);
+    kp130 = k130(4);
+monomero130   = x3(:,2);                                % Monomero(t)   a 130ºC
+polimero130   = x3(:,6);                                % Polimero(t)   a 130ºC
+PeP130        = x3(:,7);                                % PeP(t)        a 130ºC
+conversion130 = (Mo - monomero130(:))/Mo;               % Conversion(t) a 130ºC
+
+rad130        = x3(:,4);                                % R1(t)         a 130ºC
+rads130       = x3(:,5);                                % R2(t)         a 130ºC
+radicales130  = rad130 + 2.*rads130;                        % R(t) totales  a 130ºC
+rp130         = kp130 .* monomero130 .* radicales130;   % Rp(t)         a 130ºC
+
+
+% Creación del gráfico
+
+    pintarConversiones(t1, t2, t3, conversion110, conversion120, conversion130, rp110, rp120, rp130)
+
+
+
+##### SOURCE END #####
+--></body></html>

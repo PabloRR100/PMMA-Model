@@ -11,10 +11,8 @@ global I3o
 to = 0;         % s
 tf = 5400;      % s 
 
-%tiempo  = linspace(to, tf, 100000);     % Vector tiempo de reacciÃ³n
-%tiempo  = linspace(to, tf, 100);       % Vector tiempo de reacciÃ³n
 tiempo = [to tf];
-step = 100;                             % MÃ¡ximo intervalo de tiempo que se darÃ¡ a ODE
+step = 100;                             
 
 inicial = zeros(1, 7);  % Vector iniciado a 0 de las 8 variables del sistema
 inicial(1) = I3o;
@@ -24,8 +22,6 @@ inicial(2) = Mo;
 [t2,x2] = ode23s(@(t,x)sistemaDinamico120(t,x), tiempo, inicial, odeset('Maxstep', step)); % 120 ºC
 [t3,x3] = ode23s(@(t,x)sistemaDinamico130(t,x), tiempo, inicial, odeset('Maxstep', step)); % 130 ºC
 
-
-%iniciador110  = x1(:,1);                     % Iniciador(t)
 
 k110 = constantes(0, T1, Rjul, 0, 0);
     kp110 = k110(4);
@@ -41,8 +37,6 @@ rp110         = kp110 .* monomero110 .* radicales110;   % Rp(t)         a 110ºC
 
 % --- %
 
-%iniciador120  = x2(:,1);                     % Iniciador(t)
-
 k120 = constantes(0, T2, Rjul, 0, 0);
     kp120 = k120(4);
 monomero120   = x2(:,2);                                % Monomero(t)   a 120ºC
@@ -56,8 +50,6 @@ radicales120  = rad120 + 2.*rads120;                    % R(t) totales  a 120ºC
 rp120         = kp120 .* monomero120 .* radicales120;   % Rp(t)         a 120ºC
 
 % --- %
-
-%iniciador130  = x3(:,1);                     % Iniciador(t)
 
 k130 = constantes(0, T3, Rjul, 0, 0);
     kp130 = k130(4);

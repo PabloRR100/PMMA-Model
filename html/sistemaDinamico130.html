@@ -1,0 +1,219 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sistemaDinamico130</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-13"><meta name="DC.source" content="sistemaDinamico130.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Sistema dinamico en derivadas parciales para la polimerizacion a 130&ordm;C</span>
+
+<span class="keyword">function</span> f = sistemaDinamico130 (t,x)
+
+    <span class="comment">% CONDICIONES INICIALES</span>
+
+    <span class="keyword">global</span> Rjul
+    <span class="keyword">global</span> Mo                          <span class="comment">% Monomero inicial</span>
+    <span class="keyword">global</span> I3o                         <span class="comment">% Iniciador inicial</span>
+    <span class="keyword">global</span> ef                          <span class="comment">% efiencia iniciador</span>
+    <span class="keyword">global</span> T3
+    <span class="keyword">global</span> B
+    <span class="keyword">global</span> C
+
+    <span class="comment">% COMPONENTES DEL SISTEMA</span>
+
+        I3   = x(1);        <span class="comment">% x(1) = Iniciador trifuncional</span>
+        M    = x(2);        <span class="comment">% x(2) = Monomero</span>
+        I2p2 = x(3);        <span class="comment">% x(3) -&gt; Diradical, 2 peroxidos sin descomponer</span>
+
+        R1   = x(4);        <span class="comment">% x(4) -&gt; Monoradicales</span>
+        R2   = x(5);        <span class="comment">% x(5) -&gt; Diradicales</span>
+
+        P    = x(6);        <span class="comment">% x(6) -&gt; Polimero</span>
+
+        PeP  = x(7);        <span class="comment">% x(7) -&gt; Peroxidos totales en PMMA</span>
+
+        Rt = R1 + 2*R2;         <span class="comment">% Radicales totales</span>
+        X  = (Mo - M) / (Mo);   <span class="comment">% Conversi&oacute;n</span>
+
+            <span class="comment">% PARA PROBAR SI LA EFICIENCIA ES VERDAD QUE VAR&Iacute;A Y AFECTA</span>
+            efic = ef;
+            <span class="comment">%efic = ef*exp(-2*X);</span>
+            <span class="comment">%efic = (x(1)/I3o)*ef*exp(-2*X);</span>
+
+
+    <span class="comment">% CONSTANTES CIN&Eacute;TICAS</span>
+
+        T = T3;
+        R = Rjul;
+        k = constantes(X, T, R, B, C);
+
+        kd  = k(1);
+        ki0 = k(2);
+        ki1 = k(3);
+        kp  = k(4);
+        ktd = k(5);
+        ktc = k(6);
+        kfM = k(7);
+
+
+    <span class="comment">% BALANCES DE COMPONENTES</span>
+
+                            <span class="comment">% Evolucion de DEKTP (I3)                               - A.1</span>
+        f(1) = -3*efic*kd*I3;
+                            <span class="comment">% Evolucion de monomero (M)                             - A.2</span>
+        f(2) = -kp*M*Rt;
+                            <span class="comment">% Evolucion de I2p2                                     - A.5</span>
+        f(3) = 3*efic*kd*I3 - 2*ki1*M*I2p2;
+                            <span class="comment">% Evolucion de R1                                       - A.11</span>
+        f(4) = ki0*M + 4*kfM*M*R2 - 2*(ktc+ktd)*R1^2 + 8*ktd*R2^2 + 2*efic*kd*PeP;
+                            <span class="comment">% Evolucion de R2                                       - A.12</span>
+        f(5) = 2*(ki1*I2p2 - kfM*R2)*M - 2*ktc*R2*Rt - 2*ktd*R2*Rt;
+                            <span class="comment">% Evolucion de P                                        - A.16</span>
+        f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
+                            <span class="comment">% Evolucion de PeP                                      - A.23</span>
+        f(7) = ki1*I2p2*M - kd*PeP;
+
+        f = f';
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput error">Not enough input arguments.
+
+Error in sistemaDinamico130 (line 18)
+        I3   = x(1);        % x(1) = Iniciador trifuncional 
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+% Sistema dinamico en derivadas parciales para la polimerizacion a 130ºC
+
+function f = sistemaDinamico130 (t,x)
+
+    % CONDICIONES INICIALES
+    
+    global Rjul
+    global Mo                          % Monomero inicial
+    global I3o                         % Iniciador inicial
+    global ef                          % efiencia iniciador
+    global T3
+    global B
+    global C
+    
+    % COMPONENTES DEL SISTEMA
+    
+        I3   = x(1);        % x(1) = Iniciador trifuncional 
+        M    = x(2);        % x(2) = Monomero   
+        I2p2 = x(3);        % x(3) -> Diradical, 2 peroxidos sin descomponer
+
+        R1   = x(4);        % x(4) -> Monoradicales
+        R2   = x(5);        % x(5) -> Diradicales
+
+        P    = x(6);        % x(6) -> Polimero 
+
+        PeP  = x(7);        % x(7) -> Peroxidos totales en PMMA
+
+        Rt = R1 + 2*R2;         % Radicales totales
+        X  = (Mo - M) / (Mo);   % Conversión
+        
+            % PARA PROBAR SI LA EFICIENCIA ES VERDAD QUE VARÍA Y AFECTA
+            efic = ef;
+            %efic = ef*exp(-2*X);
+            %efic = (x(1)/I3o)*ef*exp(-2*X);
+  
+        
+    % CONSTANTES CINÉTICAS
+        
+        T = T3;
+        R = Rjul;
+        k = constantes(X, T, R, B, C);
+        
+        kd  = k(1);
+        ki0 = k(2);
+        ki1 = k(3);
+        kp  = k(4);
+        ktd = k(5);
+        ktc = k(6);
+        kfM = k(7);
+   
+            
+    % BALANCES DE COMPONENTES 
+    
+                            % Evolucion de DEKTP (I3)                               - A.1
+        f(1) = -3*efic*kd*I3; 
+                            % Evolucion de monomero (M)                             - A.2
+        f(2) = -kp*M*Rt;    
+                            % Evolucion de I2p2                                     - A.5
+        f(3) = 3*efic*kd*I3 - 2*ki1*M*I2p2;
+                            % Evolucion de R1                                       - A.11
+        f(4) = ki0*M + 4*kfM*M*R2 - 2*(ktc+ktd)*R1^2 + 8*ktd*R2^2 + 2*efic*kd*PeP;
+                            % Evolucion de R2                                       - A.12
+        f(5) = 2*(ki1*I2p2 - kfM*R2)*M - 2*ktc*R2*Rt - 2*ktd*R2*Rt;
+                            % Evolucion de P                                        - A.16
+        f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
+                            % Evolucion de PeP                                      - A.23
+        f(7) = ki1*I2p2*M - kd*PeP;
+
+        f = f';
+
+end
+##### SOURCE END #####
+--></body></html>

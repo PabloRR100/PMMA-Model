@@ -6,9 +6,9 @@ function f = sistemaDinamico130 (t,x)
     % CONDICIONES INICIALES
     
     global Rjul
-    global Mo                           % Monomero inicial
+    global Mo                          % Monomero inicial
     global I3o                         % Iniciador inicial
-    global ef                           % efiencia iniciador
+    global ef                          % efiencia iniciador
     global T3
     global B
     global C
@@ -22,7 +22,7 @@ function f = sistemaDinamico130 (t,x)
         R1   = x(4);        % x(4) -> Monoradicales
         R2   = x(5);        % x(5) -> Diradicales
 
-        %P    = x(6);        % x(6) -> Polimero 
+        P    = x(6);        % x(6) -> Polimero 
 
         PeP  = x(7);        % x(7) -> Peroxidos totales en PMMA
 
@@ -63,7 +63,7 @@ function f = sistemaDinamico130 (t,x)
                             % Evolucion de R2                                       - A.12
         f(5) = 2*(ki1*I2p2 - kfM*R2)*M - 2*ktc*R2*Rt - 2*ktd*R2*Rt;
                             % Evolucion de P                                        - A.16
-        %f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
+        f(6) = kfM*M*R1 + ktc/2*R1^2 + ktd*R1*Rt - kd*PeP;
                             % Evolucion de PeP                                      - A.23
         f(7) = ki1*I2p2*M - kd*PeP;
 

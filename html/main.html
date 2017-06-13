@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0122)file:///Users/pablorr10/OneDrive/UNIVERSIDAD/Ingenier%C3%ADa%20Qu%C3%ADmica/MIQ/PROYECTO/Matlab/DEKTP/DEKTP/html/main.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-13"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">variables</span>
+clear <span class="string">globals</span>
+
+<span class="comment">% DATOS EMPIRICOS</span>
+
+    <span class="keyword">global</span> tiempos110
+    <span class="keyword">global</span> convers110
+    <span class="keyword">global</span> MN110
+    <span class="keyword">global</span> MW110
+
+    <span class="keyword">global</span> tiempos120
+    <span class="keyword">global</span> convers120
+    <span class="keyword">global</span> MN120
+    <span class="keyword">global</span> MW120
+
+    <span class="keyword">global</span> tiempos130
+    <span class="keyword">global</span> convers130
+    <span class="keyword">global</span> MN130
+    <span class="keyword">global</span> MW130
+
+
+    datosMejico = <span class="string">'/Users/pablorr10/OneDrive/UNIVERSIDAD/Ingeniería Química/MIQ/PROYECTO/Matlab/data/Resultados de Pablo.xlsx'</span>;
+
+    	[tiempos110, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'B8:B17'</span>);
+        [convers110, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'D8:D17'</span>);
+        [MN110, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'E8:E17'</span>);
+            MN110 = MN110*10^5;                                                         <span class="comment">% En el excel están por 10^-5</span>
+        [MW110, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'F8:F17'</span>);
+            MW110 = MW110*10^5;
+
+
+        [tiempos120, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'B25:B34'</span>);
+        [convers120, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'D25:D34'</span>);
+        [MN120, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'E25:E34'</span>);
+            MN120 = MN120*10^5;
+        [MW120, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'F25:F34'</span>);
+            MW120 = MW120*10^5;
+
+        [tiempos130, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'B42:B51'</span>);
+        [convers130, ~, ~] = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'D42:D51'</span>);
+        [MN130, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'E42:E51'</span>);
+            MN130 = MN130*10^5;
+        [MW130, ~, ~]      = xlsread(datosMejico, <span class="string">'PolimerizacionDEKTP'</span>, <span class="string">'F42:F51'</span>);
+            MW130 = MW130*10^5;
+
+
+<span class="comment">% DEFINICION DE LOS PARAMETROS DEL SISTEMA</span>
+
+    <span class="keyword">global</span> Rjul
+    <span class="keyword">global</span> Rcal
+        Rjul = 8.314;       <span class="comment">% J/molÂ·K</span>
+        Rcal = 1.987;       <span class="comment">% cal/molÂ·K</span>
+
+    <span class="keyword">global</span> ef
+        ef = 0.75;
+
+
+<span class="comment">% DEFINICION DE LAS VARIABLES DEL SISTEMA</span>
+
+    <span class="keyword">global</span> T1               <span class="comment">% 110 ºC</span>
+    <span class="keyword">global</span> T2               <span class="comment">% 120 ºC</span>
+    <span class="keyword">global</span> T3               <span class="comment">% 130 ºC</span>
+        T1 = 110 + 273;     <span class="comment">% K</span>
+        T2 = 120 + 273;     <span class="comment">% K</span>
+        T3 = 130 + 273;     <span class="comment">% K</span>
+
+    <span class="keyword">global</span> PM
+    <span class="keyword">global</span> p
+
+        PM = 100;   <span class="comment">% g/mol</span>
+        p  = 940;  <span class="comment">% g/L</span>
+
+    <span class="keyword">global</span> Mo
+    <span class="keyword">global</span> Vo
+    <span class="keyword">global</span> I3o
+
+        I3o = 0.01;     <span class="comment">% mol/L</span>
+        <span class="comment">%I3o = 0;     % Para las pruebas sin iniciador</span>
+        Mo  = p / PM;   <span class="comment">% mol/L ( densidad / PM)</span>
+        Vo  = 0.9;      <span class="comment">% L</span>
+
+    <span class="keyword">global</span> B
+    <span class="keyword">global</span> C
+
+        B = -4;
+        C = -5;
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB® R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+clear variables
+clear globals
+        
+% DATOS EMPIRICOS
+
+    global tiempos110
+    global convers110
+    global MN110
+    global MW110
+
+    global tiempos120
+    global convers120
+    global MN120
+    global MW120
+    
+    global tiempos130
+    global convers130
+    global MN130
+    global MW130
+    
+    
+    datosMejico = '/Users/pablorr10/OneDrive/UNIVERSIDAD/Ingeniería Química/MIQ/PROYECTO/Matlab/data/Resultados de Pablo.xlsx';
+    
+    	[tiempos110, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'B8:B17');
+        [convers110, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D8:D17');
+        [MN110, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'E8:E17');
+            MN110 = MN110*10^5;                                                         % En el excel están por 10^-5
+        [MW110, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'F8:F17');
+            MW110 = MW110*10^5;
+        
+        
+        [tiempos120, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'B25:B34');
+        [convers120, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D25:D34');
+        [MN120, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'E25:E34');
+            MN120 = MN120*10^5;
+        [MW120, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'F25:F34');
+            MW120 = MW120*10^5;
+        
+        [tiempos130, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'B42:B51');
+        [convers130, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D42:D51');
+        [MN130, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'E42:E51');
+            MN130 = MN130*10^5;
+        [MW130, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'F42:F51');
+            MW130 = MW130*10^5;
+        
+        
+% DEFINICION DE LOS PARAMETROS DEL SISTEMA
+
+    global Rjul
+    global Rcal
+        Rjul = 8.314;       % J/molÂ·K
+        Rcal = 1.987;       % cal/molÂ·K
+
+    global ef
+        ef = 0.75;
+
+
+% DEFINICION DE LAS VARIABLES DEL SISTEMA
+    
+    global T1               % 110 ºC
+    global T2               % 120 ºC
+    global T3               % 130 ºC
+        T1 = 110 + 273;     % K
+        T2 = 120 + 273;     % K
+        T3 = 130 + 273;     % K
+     
+    global PM
+    global p
+
+        PM = 100;   % g/mol
+        p  = 940;  % g/L
+
+    global Mo
+    global Vo
+    global I3o
+    
+        I3o = 0.01;     % mol/L
+        %I3o = 0;     % Para las pruebas sin iniciador
+        Mo  = p / PM;   % mol/L ( densidad / PM) 
+        Vo  = 0.9;      % L
+
+    global B
+    global C
+    
+        B = -4;
+        C = -5;
+        
+##### SOURCE END #####
+--></body></html>
