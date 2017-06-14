@@ -40,6 +40,16 @@ function [Mn, Mw, X] = dpm130(tiempo, x, T)
             r6 = zeros(1, nmax);
             r7 = zeros(1, nmax);
             r8 = zeros(1, nmax);
+            
+           %genrn = Generación de monoradicales por ruptura de cadena
+            genr1 = zeros(nmax, 1);
+            genr2 = zeros(nmax, 2);
+            genr3 = zeros(nmax, 3);
+            genr4 = zeros(nmax, 4);
+            genr5 = zeros(nmax, 5);
+            genr6 = zeros(nmax, 6);
+            genr7 = zeros(nmax, 7);
+            genr8 = zeros(nmax, 8);
 
                 % Generación de monoradicales por desproporción
 
@@ -99,6 +109,7 @@ function [Mn, Mw, X] = dpm130(tiempo, x, T)
             ktd = k(5);
             ktc = k(6);
             kfM = k(7);
+            kdp = k(8);
 
             denominador(t) = (kp+kfM)*M(t) + (ktc+ktd)*RT(t);     % Factor común al radical
             alp(t) = denominador(t) / (kp*M(t));                  % Para poner 1 sobre kp*M(t)
@@ -211,16 +222,15 @@ function [Mn, Mw, X] = dpm130(tiempo, x, T)
         for n = 2:nmax
 
              % Término de GENERACIÓN de Polímero de longitud de cadena n en cada t
-
-                genP0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
-                genP1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
-                genP2(t,n) = kfM*r2(n)*M(t) + termp2(n-1) + ktd*r2(n)*RT(t);
-                genP3(t,n) = kfM*r3(n)*M(t) + termp3(n-1) + ktd*r3(n)*RT(t);
-                genP4(t,n) = kfM*r4(n)*M(t) + termp4(n-1) + ktd*r4(n)*RT(t);
-                genP5(t,n) = kfM*r5(n)*M(t) + termp5(n-1) + ktd*r5(n)*RT(t);
-                genP6(t,n) = kfM*r6(n)*M(t) + termp6(n-1) + ktd*r6(n)*RT(t);
-                genP7(t,n) = kfM*r7(n)*M(t) + termp7(n-1) + ktd*r7(n)*RT(t);
-                genP8(t,n) = kfM*r8(n)*M(t) + termp8(n-1) + ktd*r8(n)*RT(t);
+            genP0(t,n) = kfM*r0(n)*M(t) + termp0(n-1) + ktd*r0(n)*RT(t);
+            genP1(t,n) = kfM*r1(n)*M(t) + termp1(n-1) + ktd*r1(n)*RT(t);
+            genP2(t,n) = kfM*r2(n)*M(t) + termp2(n-1) + ktd*r2(n)*RT(t);
+            genP3(t,n) = kfM*r3(n)*M(t) + termp3(n-1) + ktd*r3(n)*RT(t);
+            genP4(t,n) = kfM*r4(n)*M(t) + termp4(n-1) + ktd*r4(n)*RT(t);
+            genP5(t,n) = kfM*r5(n)*M(t) + termp5(n-1) + ktd*r5(n)*RT(t);
+            genP6(t,n) = kfM*r6(n)*M(t) + termp6(n-1) + ktd*r6(n)*RT(t);
+            genP7(t,n) = kfM*r7(n)*M(t) + termp7(n-1) + ktd*r7(n)*RT(t);
+            genP8(t,n) = kfM*r8(n)*M(t) + termp8(n-1) + ktd*r8(n)*RT(t);
 
                 % MOLES de polímero 
                 NPS0(t+1,n) = NPS0(t,n) + genP0(t,n)*V*(tiempo(t+1)-tiempo(t));
@@ -233,6 +243,74 @@ function [Mn, Mw, X] = dpm130(tiempo, x, T)
                 NPS7(t+1,n) = NPS7(t,n) + genP7(t,n)*V*(tiempo(t+1)-tiempo(t));
                 NPS8(t+1,n) = NPS8(t,n) + genP8(t,n)*V*(tiempo(t+1)-tiempo(t));
 
+        end
+        
+        for n = 2:nmax          % Cortes por ruptura secuencial
+           
+            y1 = corte(1,n);
+            a = y1(1,1);
+            b = y1(1,2) + 1;
+            c = y1(2,1);
+            d = y1(2,2) + 1;
+            genr1(a,b) = genr1(a,b) + kdp*NPS1(t+1,n) / V;
+            genr1(c,d) = genr1(c,d) + kdp*NPS1(t+1,n) / V;
+            
+            y2 = corte(2,n);
+            a = y2(1,1);
+            b = y2(1,2) + 1;
+            c = y2(2,1);
+            d = y2(2,2) + 1;
+            genr2(a,b) = genr2(a,b) + kdp*NPS2(t+1,n) / V;
+            genr2(c,d) = genr2(c,d) + kdp*NPS2(t+1,n) / V;
+            
+            y3 = corte(3,n);
+            a = y3(1,1);
+            b = y3(1,2) + 1;
+            c = y3(2,1);
+            d = y3(2,2) + 1;
+            genr3(a,b) = genr3(a,b) + kdp*NPS3(t+1,n) / V;
+            genr3(c,d) = genr3(c,d) + kdp*NPS3(t+1,n) / V;
+            
+            y4 = corte(4,n);
+            a = y4(1,1);
+            b = y4(1,2) + 1;
+            c = y4(2,1);
+            d = y4(2,2) + 1;
+            genr4(a,b) = genr4(a,b) + kdp*NPS4(t+1,n) / V;
+            genr4(c,d) = genr4(c,d) + kdp*NPS4(t+1,n) / V;
+            
+            y5 = corte(5,n);
+            a = y5(1,1);
+            b = y5(1,2) + 1;
+            c = y5(2,1);
+            d = y5(2,2) + 1;
+            genr5(a,b) = genr5(a,b) + kdp*NPS5(t+1,n) / V;
+            genr5(c,d) = genr5(c,d) + kdp*NPS5(t+1,n) / V;
+            
+            y6 = corte(6,n);
+            a = y6(1,1);
+            b = y6(1,2) + 1;
+            c = y6(2,1);
+            d = y6(2,2) + 1;
+            genr6(a,b) = genr6(a,b) + kdp*NPS6(t+1,n) / V;
+            genr6(c,d) = genr6(c,d) + kdp*NPS6(t+1,n) / V;
+            
+            y7 = corte(7,n);
+            a = y7(1,1);
+            b = y7(1,2) + 1;
+            c = y7(2,1);
+            d = y7(2,2) + 1;
+            genr7(a,b) = genr7(a,b) + kdp*NPS7(t+1,n) / V;
+            genr7(c,d) = genr7(c,d) + kdp*NPS7(t+1,n) / V;
+            
+            y8 = corte(8,n);
+            a = y8(1,1);
+            b = y8(1,2) + 1;
+            c = y8(2,1);
+            d = y8(2,2) + 1;
+            genr8(a,b) = genr8(a,b) + kdp*NPS8(t+1,n) / V;
+            genr8(c,d) = genr8(c,d) + kdp*NPS8(t+1,n) / V;
+            
         end
 
         NPS0(NPS0<0)=0;

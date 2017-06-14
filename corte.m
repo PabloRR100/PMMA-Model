@@ -5,9 +5,9 @@ function f = corte(i,n)
     
     j = round((i*(n-m)+m)/n);
     
-        f(1,2)=i-j;
-        f(2,1)=n-m;
-        f(2,2)=j-1;
+        f(1,2)= i-j;
+        f(2,1)= n-m;
+        f(2,2)= j-1; % -1 El que se rompe
 
 end
 

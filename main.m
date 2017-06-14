@@ -29,7 +29,6 @@ clear globals
         [MW110, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'F8:F17');
             MW110 = MW110*10^5;
         
-        
         [tiempos120, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'B25:B34');
         [convers120, ~, ~] = xlsread(datosMejico, 'PolimerizacionDEKTP', 'D25:D34');
         [MN120, ~, ~]      = xlsread(datosMejico, 'PolimerizacionDEKTP', 'E25:E34');
