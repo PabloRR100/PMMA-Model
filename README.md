@@ -2,16 +2,16 @@
 
 ## Intro
 
-Master's Degree in Chemical Engineering Final Project.  Jun 2017
-This is the work I develop on my visit to the [Technical University of Buenos Aires][itba].  
-**Note**: The entire project was develop in Spanish.
+Master's Degree in Chemical Engineering Final Project.  Jun 2017   
+This is the work I develop on my visit to the [Technical University of Buenos Aires][itba].    
+**Note**: The entire project was develop in Spanish.   
 
-For this project I built a mathematical model for a novel technique for the polymerization of the Poly-Methil-Metacrilate.
+For this project I built a mathematical model for a novel technique for the polymerization of the Poly-Methil-Metacrilate.   
 
-**Tech**: Matlab
+**Tech**: Matlab   
 
-The entire Thesis can be downloaded [here][thesis].
-The raw publication can be found [here][publication].
+The entire Thesis can be downloaded [here][thesis].   
+The raw publication can be found [here][publication].   
 
 
 ## Initiator
