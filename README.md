@@ -19,5 +19,5 @@ The decompositions of both initiators are shown below:
 
 
 [itba]: https://www.itba.edu.ar/
-[dektp]: /imgs/initiator_dektp
-[pdp]: /imgs/initiator_pdp
+[dektp]: /imgs/initiator_dektp.png
+[pdp]: /imgs/initiator_pdp.png
