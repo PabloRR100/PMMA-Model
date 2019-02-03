@@ -64,4 +64,4 @@ The results for the mathematica model of the evolution of the molecular weight d
 [equations]: /imgs/04_equations.png
 [dynamics]: /imgs/05_dynamics.png
 [results1]: /imgs/06_results.png
-[results2]: /imgs/07_results_2.png
+[results2]: /imgs/07_results2.png
